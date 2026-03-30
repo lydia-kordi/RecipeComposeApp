@@ -1,52 +1,101 @@
 package com.yourcompany.recipecomposeapp.ui.theme
 
-import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
-import androidx.compose.material3.dynamicDarkColorScheme
-import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
 
-private val DarkColorScheme = darkColorScheme(
-    primary = Purple80,
-    secondary = PurpleGrey80,
-    tertiary = Pink80
-)
-
-private val LightColorScheme = lightColorScheme(
-    primary = Purple40,
-    secondary = PurpleGrey40,
-    tertiary = Pink40
-
-    /* Other default colors to override
-    background = Color(0xFFFFFBFE),
-    surface = Color(0xFFFFFBFE),
+private val RecipesAppLightColorScheme = lightColorScheme(
+    primary = PrimaryColor,
     onPrimary = Color.White,
-    onSecondary = Color.White,
+
+    tertiary = AccentBlue,
     onTertiary = Color.White,
-    onBackground = Color(0xFF1C1B1F),
-    onSurface = Color(0xFF1C1B1F),
-    */
+
+    tertiaryContainer = SliderTrackColor,
+
+    error = AccentColor,
+    onError = Color.White,
+
+    background = BackgroundColor,
+    onBackground = TextPrimaryColor,
+
+    surface = SurfaceColor,
+    onSurface = TextPrimaryColor,
+
+    outline = DividerColor,
+
+    surfaceVariant = SurfaceVariantColor,
+    onSurfaceVariant = TextSecondaryColor,
+
 )
+
+private val RecipesAppDarkColorScheme = darkColorScheme(
+    primary = PrimaryColorDark,
+    onPrimary = Color.Black,
+
+    tertiary = AccentBlueDark,
+    onTertiary = Color.Black,
+
+    tertiaryContainer = SliderTrackColorDark,
+
+    error = AccentColorDark,
+    onError = Color.Black,
+
+    background = BackgroundColorDark,
+    onBackground = TextPrimaryColorDark,
+
+    surface = SurfaceColorDark,
+    onSurface = TextPrimaryColorDark,
+
+    surfaceVariant = SurfaceVariantColorDark,
+    onSurfaceVariant = TextSecondaryColorDark,
+
+    outline = DividerColorDark,
+)
+
+object Dimens {
+
+    // Отступы
+    val PaddingXS = 4.dp
+    val PaddingS = 8.dp
+    val PaddingM = 16.dp
+    val PaddingL = 24.dp
+
+    // Высоты экранов / элементов
+    val ScreenTopBarHeight = 56.dp
+    val ScreenBottomBarHeight = 64.dp
+
+    // Тени (elevation)
+    val ElevationS = 2.dp
+    val ElevationM = 4.dp
+    val ElevationL = 8.dp
+
+    // Размеры элементов
+    val IconSize = 24.dp
+    val ImageSize = 120.dp
+
+    // Кнопки
+    val ButtonHeight = 48.dp
+    val ButtonPaddingHorizontal = 16.dp
+    val ButtonPaddingVertical = 12.dp
+
+    // Слайдер
+    val SliderHeight = 4.dp
+    val SliderThumbSize = 20.dp
+}
 
 @Composable
-fun RecipeComposeAppTheme(
+fun RecipesComposeAppTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
-    // Dynamic color is available on Android 12+
-    dynamicColor: Boolean = true,
     content: @Composable () -> Unit
 ) {
     val colorScheme = when {
-        dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
-            val context = LocalContext.current
-            if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
-        }
-
-        darkTheme -> DarkColorScheme
-        else -> LightColorScheme
+        darkTheme -> RecipesAppDarkColorScheme
+        else -> RecipesAppLightColorScheme
     }
 
     MaterialTheme(

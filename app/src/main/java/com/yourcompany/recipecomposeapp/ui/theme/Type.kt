@@ -45,7 +45,7 @@ val recipesAppTypography = Typography(
 @Preview(showBackground = true)
 @Composable
 fun TypographyPreview() {
-    RecipeComposeAppTheme {
+    RecipesComposeAppTheme {
         Column(
             modifier = Modifier.padding(16.dp),
             verticalArrangement = Arrangement.spacedBy(8.dp)

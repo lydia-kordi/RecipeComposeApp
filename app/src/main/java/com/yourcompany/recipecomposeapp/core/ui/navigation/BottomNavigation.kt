@@ -26,7 +26,8 @@ fun BottomNavigation(
         modifier = modifier
             .fillMaxWidth()
             .padding(
-                horizontal = Dimens.PaddingM
+                horizontal = Dimens.PaddingM,
+                vertical = Dimens.PaddingXS,
             ),
         horizontalArrangement = Arrangement.spacedBy(Dimens.PaddingS)
     ) {

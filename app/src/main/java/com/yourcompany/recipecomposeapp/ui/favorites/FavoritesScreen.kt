@@ -1,4 +1,4 @@
-package com.yourcompany.recipecomposeapp.ui.categories
+package com.yourcompany.recipecomposeapp.ui.favorites
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -14,7 +14,7 @@ import com.yourcompany.recipecomposeapp.core.ui.theme.RecipesAppTheme
 import com.yourcompany.recipecomposeapp.core.ui.ScreenHeader
 
 @Composable
-fun CategoriesScreen(
+fun FavoritesScreen(
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -22,21 +22,20 @@ fun CategoriesScreen(
     ) {
         ScreenHeader(
             imagePainter = painterResource(id = R.drawable.header_image),
-            contentDescription = "Categories header",
-            title = "Категории"
+            contentDescription = "Favorites header",
+            title = "Избранное"
         )
 
         Text(
-            text = "Список категорий будет здесь",
-            modifier = Modifier.padding(16.dp)
+            text = "Любимые блюда будут здесь", modifier = Modifier.padding(16.dp)
         )
     }
 }
 
 @Preview(showBackground = true)
 @Composable
-fun CategoriesScreenPreview() {
+fun FavoritesScreenPreview() {
     RecipesAppTheme {
-        CategoriesScreen()
+        FavoritesScreen()
     }
 }

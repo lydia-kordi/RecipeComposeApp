@@ -1,4 +1,4 @@
-package com.yourcompany.recipecomposeapp.ui.categories.components
+package com.yourcompany.recipecomposeapp.core.ui
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
@@ -23,16 +23,16 @@ fun ScreenHeader(
     title: String,
 ) {
     Box(
-        modifier = Modifier.height(Dimens.HeaderHeight)
+        modifier = Modifier.Companion.height(Dimens.HeaderHeight)
     ) {
         Image(
             painter = imagePainter,
             contentDescription = contentDescription,
-            modifier = Modifier.fillMaxSize(),
-            contentScale = ContentScale.Crop
+            modifier = Modifier.Companion.fillMaxSize(),
+            contentScale = ContentScale.Companion.Crop
         )
         Surface(
-            modifier = Modifier.align(Alignment.BottomStart)
+            modifier = Modifier.Companion.align(Alignment.Companion.BottomStart)
         ) {
             Text(
                 text = title
@@ -45,7 +45,7 @@ fun ScreenHeader(
 @Composable
 fun ScreenHeaderPreview() {
     ScreenHeader(
-        imagePainter = ColorPainter(Color.LightGray),
+        imagePainter = ColorPainter(Color.Companion.LightGray),
         contentDescription = "Preview header image",
         title = "Категории"
     )

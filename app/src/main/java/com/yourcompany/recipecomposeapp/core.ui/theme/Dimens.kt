@@ -1,4 +1,4 @@
-package com.yourcompany.recipecomposeapp.ui.theme
+package com.yourcompany.recipecomposeapp.core.ui.theme
 
 import androidx.compose.ui.unit.dp
 
@@ -27,6 +27,7 @@ object Dimens {
     val ButtonHeight = 48.dp
     val ButtonPaddingHorizontal = 16.dp
     val ButtonPaddingVertical = 12.dp
+    val ButtonCornerRadius = 12.dp
 
     // Слайдер
     val SliderHeight = 4.dp

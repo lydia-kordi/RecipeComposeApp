@@ -15,6 +15,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.yourcompany.recipecomposeapp.core.ui.theme.Dimens
 import com.yourcompany.recipecomposeapp.core.ui.theme.RecipesAppTheme
+import androidx.compose.foundation.layout.navigationBarsPadding
 
 @Composable
 fun BottomNavigation(
@@ -25,6 +26,7 @@ fun BottomNavigation(
     Row(
         modifier = modifier
             .fillMaxWidth()
+            .navigationBarsPadding()
             .padding(
                 horizontal = Dimens.PaddingM,
                 vertical = Dimens.PaddingXS,

@@ -11,39 +11,37 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 
 val recipesAppTypography = Typography(
     displayLarge = TextStyle(
         fontFamily = montserratAlternatesFontFamily,
         fontWeight = FontWeight.SemiBold,
-        fontSize = 20.sp,
-        lineHeight = 24.sp,
+        fontSize = Dimens.TextSizeDisplayLarge,
+        lineHeight = Dimens.LineHeightDisplayLarge,
     ),
     titleMedium = TextStyle(
         fontFamily = montserratAlternatesFontFamily,
         fontWeight = FontWeight.SemiBold,
-        fontSize = 16.sp,
-        lineHeight = 19.sp,
+        fontSize = Dimens.TextSizeTitleMedium,
+        lineHeight = Dimens.LineHeightTitleMedium,
     ),
     bodyMedium = TextStyle(
         fontFamily = montserratFontFamily,
         fontWeight = FontWeight.Medium,
-        fontSize = 14.sp,
-        lineHeight = 16.sp,
+        fontSize = Dimens.TextSizeBodyMedium,
+        lineHeight = Dimens.LineHeightBodyMedium,
     ),
     bodySmall = TextStyle(
         fontFamily = montserratFontFamily,
         fontWeight = FontWeight.Medium,
-        fontSize = 12.sp,
-        lineHeight = 16.sp,
+        fontSize = Dimens.TextSizeBodySmall,
+        lineHeight = Dimens.LineHeightBodySmall,
     ),
     labelLarge = TextStyle(
         fontFamily = montserratFontFamily,
         fontWeight = FontWeight.Normal,
-        fontSize = 16.sp,
-        lineHeight = 19.5.sp,
+        fontSize = Dimens.TextSizeLabelLarge,
+        lineHeight = Dimens.LineHeightLabelLarge,
     )
 )
 
@@ -52,8 +50,8 @@ val recipesAppTypography = Typography(
 fun TypographyPreview() {
     RecipesAppTheme {
         Column(
-            modifier = Modifier.padding(16.dp),
-            verticalArrangement = Arrangement.spacedBy(8.dp)
+            modifier = Modifier.padding(Dimens.PaddingM),
+            verticalArrangement = Arrangement.spacedBy(Dimens.PaddingS)
         ) {
             Text(
                 "displayLarge - Заголовки экранов",

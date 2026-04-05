@@ -1,6 +1,8 @@
 package com.yourcompany.recipecomposeapp.core.ui.theme
 
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.TextUnit
+import androidx.compose.ui.unit.sp
 
 object Dimens {
 
@@ -38,4 +40,18 @@ object Dimens {
 
     // Размеры элементов
     val IconButtonSize = 40.dp
+
+    // Типографика: размер текста
+    val TextSizeDisplayLarge: TextUnit = 20.sp
+    val TextSizeTitleMedium: TextUnit = 16.sp
+    val TextSizeBodyMedium: TextUnit = 14.sp
+    val TextSizeBodySmall: TextUnit = 12.sp
+    val TextSizeLabelLarge: TextUnit = 16.sp
+
+    // Типографика: высота строки
+    val LineHeightDisplayLarge: TextUnit = 24.sp
+    val LineHeightTitleMedium: TextUnit = 19.sp
+    val LineHeightBodyMedium: TextUnit = 16.sp
+    val LineHeightBodySmall: TextUnit = 16.sp
+    val LineHeightLabelLarge: TextUnit = 19.5.sp
 }

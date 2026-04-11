@@ -1,9 +1,13 @@
 package com.yourcompany.recipecomposeapp.core.ui
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -23,19 +27,34 @@ fun ScreenHeader(
     title: String,
 ) {
     Box(
-        modifier = Modifier.Companion.height(Dimens.HeaderHeight)
+        modifier = Modifier.height(Dimens.HeaderHeight)
     ) {
         Image(
             painter = imagePainter,
             contentDescription = contentDescription,
-            modifier = Modifier.Companion.fillMaxSize(),
-            contentScale = ContentScale.Companion.Crop
+            modifier = Modifier.fillMaxSize(),
+            contentScale = ContentScale.Crop
         )
         Surface(
-            modifier = Modifier.Companion.align(Alignment.Companion.BottomStart)
+            modifier = Modifier
+                .align(Alignment.BottomStart)
+                .padding(
+                    start = Dimens.PaddingM,
+            bottom = Dimens.PaddingM
+        ),
+        shape = RoundedCornerShape(Dimens.CornerRadiusS),
+        border = BorderStroke(Dimens.BorderWidthS, MaterialTheme.colorScheme.outline),
+        color = MaterialTheme.colorScheme.surface
         ) {
             Text(
-                text = title
+                text = title,
+                modifier = Modifier.padding(
+                    horizontal = Dimens.PaddingM,
+                    vertical = Dimens.PaddingS
+                ),
+                style = MaterialTheme.typography.displayLarge,
+                color = MaterialTheme.colorScheme.primary
+
             )
         }
     }
@@ -45,7 +64,7 @@ fun ScreenHeader(
 @Composable
 fun ScreenHeaderPreview() {
     ScreenHeader(
-        imagePainter = ColorPainter(Color.Companion.LightGray),
+        imagePainter = ColorPainter(Color.LightGray),
         contentDescription = "Preview header image",
         title = "Категории"
     )

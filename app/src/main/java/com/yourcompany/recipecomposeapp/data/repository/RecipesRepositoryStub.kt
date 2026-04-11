@@ -125,7 +125,7 @@ private val burgerRecipes = listOf(
     )
 )
 
-class RecipesRepositoryStub {
+object RecipesRepositoryStub {
 
     fun getCategories(): List<CategoryDto> = categories
 

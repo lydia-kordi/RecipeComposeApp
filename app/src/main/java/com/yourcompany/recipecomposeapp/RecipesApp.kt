@@ -35,7 +35,10 @@ fun RecipesApp() {
             when (currentScreen) {
                 ScreenId.CATEGORIES -> {
                     CategoriesScreen(
-                        modifier = Modifier.padding(paddingValues)
+                        modifier = Modifier.padding(paddingValues),
+                        onCategoryClick = { _ ->
+                            currentScreen = ScreenId.RECIPES
+                        }
                     )
                 }
 

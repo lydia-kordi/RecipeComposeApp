@@ -54,4 +54,12 @@ object Dimens {
     val LineHeightBodyMedium: TextUnit = 16.sp
     val LineHeightBodySmall: TextUnit = 16.sp
     val LineHeightLabelLarge: TextUnit = 19.5.sp
+
+    // Ширина рамки
+    val BorderWidthS = 1.dp
+
+    // Радиусы скругления
+    val CornerRadiusS = 8.dp
+    val CornerRadiusM = 12.dp
+    val CornerRadiusL = 16.dp
 }

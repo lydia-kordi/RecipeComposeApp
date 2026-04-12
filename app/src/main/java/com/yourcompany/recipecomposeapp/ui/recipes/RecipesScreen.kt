@@ -20,8 +20,9 @@ import coil3.compose.rememberAsyncImagePainter
 import com.yourcompany.recipecomposeapp.core.ui.theme.Dimens
 import com.yourcompany.recipecomposeapp.data.repository.RecipesRepositoryStub
 import com.yourcompany.recipecomposeapp.ui.categories.model.toUiModel
-import com.yourcompany.recipecomposeapp.ui.recipes.model.RecipeUiModel
-import com.yourcompany.recipecomposeapp.ui.recipes.model.toUiModel
+import com.yourcompany.recipecomposeapp.ui.recipes.model.RecipeItemUiModel
+import com.yourcompany.recipecomposeapp.ui.recipes.model.toRecipeItemUiModel
+
 @Composable
 fun RecipesScreen(
     modifier: Modifier = Modifier,
@@ -29,7 +30,8 @@ fun RecipesScreen(
     categoryTitle: String
 ) {
     var recipes by remember {
-        mutableStateOf<List<RecipeUiModel>>(emptyList())
+        mutableStateOf<List<
+                RecipeItemUiModel>>(emptyList())
     }
 
     val category = remember(categoryId) {
@@ -44,7 +46,7 @@ fun RecipesScreen(
 
     LaunchedEffect(categoryId) {
         recipes = RecipesRepositoryStub.getRecipesByCategoryId(categoryId)
-            .map { it.toUiModel() }
+            .map { it.toRecipeItemUiModel() }
     }
 
     Column(

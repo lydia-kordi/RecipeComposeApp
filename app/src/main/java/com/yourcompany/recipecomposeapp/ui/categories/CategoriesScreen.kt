@@ -16,6 +16,7 @@ import com.yourcompany.recipecomposeapp.core.ui.ScreenHeader
 import com.yourcompany.recipecomposeapp.core.ui.theme.Dimens
 import com.yourcompany.recipecomposeapp.data.repository.RecipesRepositoryStub
 import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.runtime.remember
 import com.yourcompany.recipecomposeapp.ui.categories.model.toUiModel
 
 
@@ -24,7 +25,7 @@ fun CategoriesScreen(
     modifier: Modifier = Modifier,
     onCategoryClick: (Int, String) -> Unit
 ) {
-    val categories = RecipesRepositoryStub.getCategories().map { it.toUiModel() }
+    val categories = remember { RecipesRepositoryStub.getCategories().map { it.toUiModel() } }
 
     Column(
         modifier = modifier.fillMaxSize()

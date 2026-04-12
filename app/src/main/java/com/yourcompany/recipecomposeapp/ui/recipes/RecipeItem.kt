@@ -1,7 +1,6 @@
 package com.yourcompany.recipecomposeapp.ui.recipes
 
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -11,7 +10,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import coil3.compose.AsyncImage
-import com.yourcompany.recipecomposeapp.ui.recipes.model.RecipeUiModel
 import androidx.compose.material3.Text
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
@@ -20,10 +18,11 @@ import com.yourcompany.recipecomposeapp.core.ui.theme.Dimens
 import com.yourcompany.recipecomposeapp.R
 import com.yourcompany.recipecomposeapp.core.ui.theme.RecipesAppTheme
 import com.yourcompany.recipecomposeapp.ui.ASSETS_URI_PREFIX
+import com.yourcompany.recipecomposeapp.ui.recipes.model.RecipeItemUiModel
 
 @Composable
 fun RecipeItem(
-    recipe: RecipeUiModel,
+    recipe: RecipeItemUiModel,
     onClick: (Int) -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -66,13 +65,10 @@ fun RecipeItem(
 private fun RecipeItemPreview() {
     RecipesAppTheme {
         RecipeItem(
-            recipe = RecipeUiModel(
+            recipe = RecipeItemUiModel(
                 id = 1,
                 title = "ЧИЗБУРГЕР",
-                ingredients = emptyList(),
-                method = emptyList(),
-                imageUrl = ASSETS_URI_PREFIX + "burger.png",
-                isFavorite = false,
+                imageUrl = ASSETS_URI_PREFIX + "burger.png"
             ),
             onClick = { _ -> },
         )

@@ -11,6 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.yourcompany.recipecomposeapp.core.ui.navigation.BottomNavigation
 import com.yourcompany.recipecomposeapp.core.ui.theme.RecipesAppTheme
+import com.yourcompany.recipecomposeapp.data.repository.RecipesRepositoryStub
 import com.yourcompany.recipecomposeapp.ui.categories.CategoriesScreen
 import com.yourcompany.recipecomposeapp.ui.favorites.FavoritesScreen
 import com.yourcompany.recipecomposeapp.ui.recipes.RecipesScreen
@@ -18,6 +19,8 @@ import com.yourcompany.recipecomposeapp.ui.recipes.RecipesScreen
 @Composable
 fun RecipesApp() {
     var currentScreen by remember { mutableStateOf(ScreenId.CATEGORIES) }
+    var selectedCategoryId by remember { mutableStateOf<Int?>(null) }
+    var selectedCategoryTitle by remember { mutableStateOf("") }
 
     RecipesAppTheme {
         Scaffold(
@@ -36,7 +39,9 @@ fun RecipesApp() {
                 ScreenId.CATEGORIES -> {
                     CategoriesScreen(
                         modifier = Modifier.padding(paddingValues),
-                        onCategoryClick = { _ ->
+                        onCategoryClick = { categoryId, categoryTitle ->
+                            selectedCategoryId = categoryId
+                            selectedCategoryTitle = categoryTitle
                             currentScreen = ScreenId.RECIPES
                         }
                     )
@@ -50,7 +55,9 @@ fun RecipesApp() {
 
                 ScreenId.RECIPES -> {
                     RecipesScreen(
-                        modifier = Modifier.padding(paddingValues)
+                        modifier = Modifier.padding(paddingValues),
+                        categoryId = selectedCategoryId ?: error("Category ID is required"),
+                        categoryTitle = selectedCategoryTitle
                     )
                 }
             }

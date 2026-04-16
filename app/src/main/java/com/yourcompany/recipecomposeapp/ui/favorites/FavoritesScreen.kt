@@ -22,7 +22,7 @@ fun FavoritesScreen(
         ScreenHeader(
             imagePainter = painterResource(id = R.drawable.header_image),
             contentDescription = "Favorites header",
-            title = "Избранное"
+            title = "ИЗБРАННОЕ"
         )
 
         Text(

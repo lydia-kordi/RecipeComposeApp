@@ -16,3 +16,9 @@ fun RecipeDto.toRecipeItemUiModel() = RecipeItemUiModel(
     title = title,
     imageUrl = if (imageUrl.startsWith("http")) imageUrl else ASSETS_URI_PREFIX + imageUrl
 )
+
+fun RecipeUiModel.toRecipeItemUiModel() = RecipeItemUiModel(
+    id = id,
+    title = title,
+    imageUrl = imageUrl
+)

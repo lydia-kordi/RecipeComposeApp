@@ -20,17 +20,18 @@ import coil3.compose.rememberAsyncImagePainter
 import com.yourcompany.recipecomposeapp.core.ui.theme.Dimens
 import com.yourcompany.recipecomposeapp.data.repository.RecipesRepositoryStub
 import com.yourcompany.recipecomposeapp.ui.categories.model.toUiModel
-import com.yourcompany.recipecomposeapp.ui.recipes.model.RecipeItemUiModel
+import com.yourcompany.recipecomposeapp.ui.recipes.model.RecipeUiModel
+import com.yourcompany.recipecomposeapp.ui.recipes.model.toUiModel
 import com.yourcompany.recipecomposeapp.ui.recipes.model.toRecipeItemUiModel
 
 @Composable
 fun RecipesScreen(
     modifier: Modifier = Modifier,
     categoryId: Int,
-    onRecipeClick: (Int) -> Unit
+    onRecipeClick: (Int, RecipeUiModel) -> Unit
 ) {
     var recipes by remember {
-        mutableStateOf<List<RecipeItemUiModel>>(emptyList())
+        mutableStateOf<List<RecipeUiModel>>(emptyList())
     }
 
     val category = remember(categoryId) {
@@ -47,7 +48,7 @@ fun RecipesScreen(
 
     LaunchedEffect(categoryId) {
         recipes = RecipesRepositoryStub.getRecipesByCategoryId(categoryId)
-            .map { it.toRecipeItemUiModel() }
+            .map { it.toUiModel() }
     }
 
     Column(
@@ -74,8 +75,10 @@ fun RecipesScreen(
                 key = { recipe -> recipe.id }
             ) { recipe ->
                 RecipeItem(
-                    recipe = recipe,
-                    onClick = onRecipeClick
+                    recipe = recipe.toRecipeItemUiModel(),
+                    onClick = { recipeId ->
+                        onRecipeClick(recipeId, recipe)
+                    }
                 )
             }
         }
@@ -88,7 +91,7 @@ fun RecipesScreenPreview() {
     RecipesAppTheme {
         RecipesScreen(
             categoryId = 0,
-            onRecipeClick = { _ -> }
+            onRecipeClick = { _, _ -> }
         )
     }
 }

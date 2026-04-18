@@ -4,6 +4,7 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -27,7 +28,9 @@ fun ScreenHeader(
     title: String,
 ) {
     Box(
-        modifier = Modifier.height(Dimens.HeaderHeight)
+        modifier = Modifier
+            .height(Dimens.HeaderHeight)
+            .fillMaxWidth()
     ) {
         Image(
             painter = imagePainter,
@@ -40,11 +43,12 @@ fun ScreenHeader(
                 .align(Alignment.BottomStart)
                 .padding(
                     start = Dimens.PaddingM,
-            bottom = Dimens.PaddingM
-        ),
-        shape = RoundedCornerShape(Dimens.CornerRadiusS),
-        border = BorderStroke(Dimens.BorderWidthS, MaterialTheme.colorScheme.outline),
-        color = MaterialTheme.colorScheme.surface
+                    end = Dimens.PaddingM,
+                    bottom = Dimens.PaddingM
+                ),
+            shape = RoundedCornerShape(Dimens.CornerRadiusS),
+            border = BorderStroke(Dimens.BorderWidthS, MaterialTheme.colorScheme.outline),
+            color = MaterialTheme.colorScheme.surface
         ) {
             Text(
                 text = title,
@@ -52,7 +56,7 @@ fun ScreenHeader(
                     horizontal = Dimens.PaddingM,
                     vertical = Dimens.PaddingS
                 ),
-                style = MaterialTheme.typography.displayLarge,
+                style = MaterialTheme.typography.titleLarge,
                 color = MaterialTheme.colorScheme.primary
 
             )

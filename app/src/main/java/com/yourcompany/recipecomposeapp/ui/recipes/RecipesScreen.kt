@@ -28,7 +28,7 @@ import com.yourcompany.recipecomposeapp.ui.recipes.model.toRecipeItemUiModel
 fun RecipesScreen(
     modifier: Modifier = Modifier,
     categoryId: Int,
-    onRecipeClick: (Int, RecipeUiModel) -> Unit
+    onRecipeClick: (Int) -> Unit
 ) {
     var recipes by remember {
         mutableStateOf<List<RecipeUiModel>>(emptyList())
@@ -77,7 +77,7 @@ fun RecipesScreen(
                 RecipeItem(
                     recipe = recipe.toRecipeItemUiModel(),
                     onClick = { recipeId ->
-                        onRecipeClick(recipeId, recipe)
+                        onRecipeClick(recipeId)
                     }
                 )
             }
@@ -91,7 +91,7 @@ fun RecipesScreenPreview() {
     RecipesAppTheme {
         RecipesScreen(
             categoryId = 0,
-            onRecipeClick = { _, _ -> }
+            onRecipeClick = { _ -> }
         )
     }
 }

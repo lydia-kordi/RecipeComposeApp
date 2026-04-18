@@ -135,4 +135,8 @@ object RecipesRepositoryStub {
             else -> emptyList()
         }
     }
+
+    fun getRecipeById(recipeId: Int): RecipeDto? {
+        return burgerRecipes.find { it.id == recipeId }
+    }
 }

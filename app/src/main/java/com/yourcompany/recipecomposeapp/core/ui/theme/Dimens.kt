@@ -63,6 +63,10 @@ object Dimens {
     val CornerRadiusM = 12.dp
     val CornerRadiusL = 16.dp
 
-    // Размеры элементов
+    // Высота элементов
     val RecipeCardImageHeight = 160.dp
+
+    // Размер слайдера
+
+    val SliderHeightM = 32.dp
 }

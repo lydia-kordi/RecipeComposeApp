@@ -27,11 +27,10 @@ import com.yourcompany.recipecomposeapp.ui.recipes.model.toRecipeItemUiModel
 fun RecipesScreen(
     modifier: Modifier = Modifier,
     categoryId: Int,
-    categoryTitle: String
+    onRecipeClick: (Int) -> Unit
 ) {
     var recipes by remember {
-        mutableStateOf<List<
-                RecipeItemUiModel>>(emptyList())
+        mutableStateOf<List<RecipeItemUiModel>>(emptyList())
     }
 
     val category = remember(categoryId) {
@@ -39,6 +38,8 @@ fun RecipesScreen(
             .find { it.id == categoryId }
             ?.toUiModel()
     }
+
+    val categoryTitle = category?.title.orEmpty()
 
     val headerPainter = rememberAsyncImagePainter(
         model = category?.imageUrl
@@ -74,7 +75,7 @@ fun RecipesScreen(
             ) { recipe ->
                 RecipeItem(
                     recipe = recipe,
-                    onClick = { _ -> }
+                    onClick = onRecipeClick
                 )
             }
         }
@@ -87,7 +88,7 @@ fun RecipesScreenPreview() {
     RecipesAppTheme {
         RecipesScreen(
             categoryId = 0,
-            categoryTitle = "Бургеры"
+            onRecipeClick = { _ -> }
         )
     }
 }

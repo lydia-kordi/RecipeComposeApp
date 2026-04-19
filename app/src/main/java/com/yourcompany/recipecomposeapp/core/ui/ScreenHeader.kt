@@ -56,7 +56,7 @@ fun ScreenHeader(
                     horizontal = Dimens.PaddingM,
                     vertical = Dimens.PaddingS
                 ),
-                style = MaterialTheme.typography.titleLarge,
+                style = MaterialTheme.typography.displayLarge,
                 color = MaterialTheme.colorScheme.primary
 
             )

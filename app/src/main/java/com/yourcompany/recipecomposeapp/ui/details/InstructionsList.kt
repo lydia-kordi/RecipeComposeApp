@@ -1,7 +1,6 @@
 package com.yourcompany.recipecomposeapp.ui.details
 
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
@@ -10,6 +9,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.yourcompany.recipecomposeapp.core.ui.theme.Dimens
 import com.yourcompany.recipecomposeapp.core.ui.theme.RecipesAppTheme
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 
 @Composable
 fun InstructionsList(
@@ -18,34 +21,33 @@ fun InstructionsList(
 ) {
     Column(modifier = modifier) {
         Text(
-            text = "Способ приготовления",
-            modifier = Modifier.padding(bottom = Dimens.PaddingS)
+            text = "Способ приготовления".uppercase(),
+            style = MaterialTheme.typography.displayLarge,
+            color = MaterialTheme.colorScheme.primary,
+            modifier = Modifier.padding(bottom = Dimens.PaddingM)
         )
 
-        instructions.forEachIndexed { index, instruction ->
-            InstructionItem(
-                stepNumber = index + 1,
-                instruction = instruction.removePrefix("${index + 1}. ").trim(),
-                modifier = Modifier.padding(bottom = Dimens.PaddingS)
-            )
+        Surface(
+            modifier = Modifier.fillMaxWidth(),
+            shape = RoundedCornerShape(Dimens.CornerRadiusM),
+            color = MaterialTheme.colorScheme.surface
+        ) {
+            Column {
+                instructions.forEachIndexed { index, instruction ->
+                    InstructionItem(
+                        stepNumber = index + 1,
+                        instruction = instruction.removePrefix("${index + 1}. ").trim(),
+                        modifier = Modifier.fillMaxWidth()
+                    )
+
+                    if (index < instructions.lastIndex) {
+                        HorizontalDivider(
+                            color = MaterialTheme.colorScheme.outline.copy(alpha = 1.5f)
+                        )
+                    }
+                }
+            }
         }
-    }
-}
-
-@Composable
-fun InstructionItem(
-    stepNumber: Int,
-    instruction: String,
-    modifier: Modifier = Modifier
-) {
-    Row(
-        modifier = modifier.fillMaxWidth()
-    ) {
-        Text(text = "$stepNumber.")
-        Text(
-            text = instruction,
-            modifier = Modifier.padding(start = Dimens.PaddingS)
-        )
     }
 }
 

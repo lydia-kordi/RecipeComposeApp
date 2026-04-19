@@ -43,7 +43,17 @@ fun RecipeDetailsScreen(
         model = recipe.imageUrl
     )
 
-    var currentPortions by remember { mutableIntStateOf(2) }
+    var currentPortions by remember (recipe.id) { mutableIntStateOf(recipe.servings) }
+
+    val scaledIngredients = remember(currentPortions, recipe.servings, recipe.ingredients) {
+        val multiplier = currentPortions.toDouble() / recipe.servings
+
+        recipe.ingredients.map { ingredient ->
+            ingredient.copy(
+                quantity = ingredient.quantity?.times(multiplier)
+            )
+        }
+    }
 
     Column(
         modifier = modifier
@@ -65,7 +75,7 @@ fun RecipeDetailsScreen(
         ) {
             Text(
                 text = "Ингредиенты".uppercase(),
-                style = MaterialTheme.typography.titleLarge,
+                style = MaterialTheme.typography.displayLarge,
                 color = MaterialTheme.colorScheme.primary
             )
 
@@ -89,7 +99,7 @@ fun RecipeDetailsScreen(
         }
 
         IngredientsList(
-            ingredients = recipe.ingredients,
+            ingredients = scaledIngredients,
             modifier = Modifier.padding(
                 start = Dimens.PaddingM,
                 end = Dimens.PaddingM,

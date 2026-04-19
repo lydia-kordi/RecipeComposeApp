@@ -20,30 +20,22 @@ import com.yourcompany.recipecomposeapp.core.ui.theme.RecipesAppTheme
 import com.yourcompany.recipecomposeapp.data.repository.RecipesRepositoryStub
 import com.yourcompany.recipecomposeapp.ui.recipes.model.RecipeUiModel
 import com.yourcompany.recipecomposeapp.ui.recipes.model.toUiModel
+import androidx.compose.ui.platform.LocalContext
+import com.yourcompany.recipecomposeapp.core.utils.shareRecipe
 
 @Composable
 fun RecipeDetailsScreen(
-    recipeId: Int,
+    recipe: RecipeUiModel,
     modifier: Modifier = Modifier
 ) {
-    val recipe: RecipeUiModel? = RecipesRepositoryStub
-        .getRecipeById(recipeId)
-        ?.toUiModel()
-
-    if (recipe == null) {
-        Column(
-            modifier = modifier.padding(Dimens.PaddingM)
-        ) {
-            Text(text = "Рецепт не найден")
-        }
-        return
-    }
 
     val headerPainter = rememberAsyncImagePainter(
         model = recipe.imageUrl
     )
 
-    var currentPortions by remember (recipe.id) { mutableIntStateOf(recipe.servings) }
+    var currentPortions by remember(recipe.id) { mutableIntStateOf(recipe.servings) }
+
+    val context = LocalContext.current
 
     val scaledIngredients = remember(currentPortions, recipe.servings, recipe.ingredients) {
         val multiplier = currentPortions.toDouble() / recipe.servings
@@ -62,7 +54,11 @@ fun RecipeDetailsScreen(
         ScreenHeader(
             imagePainter = headerPainter,
             contentDescription = recipe.title,
-            title = recipe.title.uppercase()
+            title = recipe.title.uppercase(),
+            showShareButton = true,
+            onShareClick = {
+                shareRecipe(context, recipe.id, recipe.title)
+            }
         )
 
         Column(
@@ -123,7 +119,13 @@ fun RecipeDetailsScreen(
 @Preview(showBackground = true)
 @Composable
 fun RecipeDetailsScreenPreview() {
+    val recipe = RecipesRepositoryStub
+        .getRecipeById(0)
+        ?.toUiModel()
+
     RecipesAppTheme {
-        RecipeDetailsScreen(recipeId = 0)
+        recipe?.let {
+            RecipeDetailsScreen(recipe = it)
+        }
     }
 }

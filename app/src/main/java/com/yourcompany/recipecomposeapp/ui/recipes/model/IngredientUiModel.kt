@@ -9,7 +9,7 @@ import com.yourcompany.recipecomposeapp.data.model.IngredientDto
 @Parcelize
 data class IngredientUiModel(
     val name: String,
-    val quantity: String,
+    val quantity: Double?,
     val unitOfMeasure: String
 ) : Parcelable
 

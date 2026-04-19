@@ -47,33 +47,34 @@ private val burgerRecipes = listOf(
     RecipeDto(
         id = 0,
         title = "Классический бургер с говядиной",
+        servings = 4,
         ingredients = listOf(
-            IngredientDto(quantity = "0.5", unitOfMeasure = "кг", description = "говяжий фарш"),
+            IngredientDto(quantity = 0.5, unitOfMeasure = "кг", description = "говяжий фарш"),
             IngredientDto(
-                quantity = "1.0",
+                quantity = 1.0,
                 unitOfMeasure = "шт",
                 description = "луковица, мелко нарезанная"
             ),
             IngredientDto(
-                quantity = "2.0",
+                quantity = 2.0,
                 unitOfMeasure = "зубч",
                 description = "чеснок, измельченный"
             ),
             IngredientDto(
-                quantity = "4.0",
+                quantity = 4.0,
                 unitOfMeasure = "шт",
                 description = "булочки для бургера"
             ),
-            IngredientDto(quantity = "4.0", unitOfMeasure = "шт", description = "листа салата"),
+            IngredientDto(quantity = 4.0, unitOfMeasure = "шт", description = "листа салата"),
             IngredientDto(
-                quantity = "1.0",
+                quantity = 1.0,
                 unitOfMeasure = "шт",
                 description = "помидор, нарезанный кольцами"
             ),
-            IngredientDto(quantity = "2.0", unitOfMeasure = "ст. л.", description = "горчица"),
-            IngredientDto(quantity = "2.0", unitOfMeasure = "ст. л.", description = "кетчуп"),
+            IngredientDto(quantity = 2.0, unitOfMeasure = "ст. л.", description = "горчица"),
+            IngredientDto(quantity = 2.0, unitOfMeasure = "ст. л.", description = "кетчуп"),
             IngredientDto(
-                quantity = "по вкусу",
+                quantity = null,
                 unitOfMeasure = "",
                 description = "соль и черный перец"
             )
@@ -90,26 +91,27 @@ private val burgerRecipes = listOf(
     RecipeDto(
         id = 1,
         title = "Чизбургер с беконом",
+        servings = 4,
         ingredients = listOf(
-            IngredientDto(quantity = "0.4", unitOfMeasure = "кг", description = "говяжий фарш"),
-            IngredientDto(quantity = "4.0", unitOfMeasure = "шт", description = "ломтика бекона"),
+            IngredientDto(quantity = 0.4, unitOfMeasure = "кг", description = "говяжий фарш"),
+            IngredientDto(quantity = 4.0, unitOfMeasure = "шт", description = "ломтика бекона"),
             IngredientDto(
-                quantity = "4.0",
+                quantity = 4.0,
                 unitOfMeasure = "шт",
                 description = "ломтика сыра чеддер"
             ),
             IngredientDto(
-                quantity = "4.0",
+                quantity = 4.0,
                 unitOfMeasure = "шт",
                 description = "булочки для бургера"
             ),
             IngredientDto(
-                quantity = "1.0",
+                quantity = 1.0,
                 unitOfMeasure = "шт",
                 description = "помидор, нарезанный"
             ),
             IngredientDto(
-                quantity = "по вкусу",
+                quantity = null,
                 unitOfMeasure = "",
                 description = "майонез и кетчуп"
             )
@@ -134,5 +136,9 @@ object RecipesRepositoryStub {
             0 -> burgerRecipes
             else -> emptyList()
         }
+    }
+
+    fun getRecipeById(recipeId: Int): RecipeDto? {
+        return burgerRecipes.find { it.id == recipeId }
     }
 }

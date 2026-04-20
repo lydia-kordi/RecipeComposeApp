@@ -1,12 +1,16 @@
 package com.yourcompany.recipecomposeapp.core.ui
 
+import androidx.compose.animation.Crossfade
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Share
@@ -24,6 +28,10 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.tooling.preview.Preview
 import com.yourcompany.recipecomposeapp.core.ui.theme.Dimens
 import androidx.compose.material3.Icon
+import com.yourcompany.recipecomposeapp.R
+import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.graphics.vector.rememberVectorPainter
+import androidx.compose.ui.res.vectorResource
 
 @Composable
 fun ScreenHeader(
@@ -31,7 +39,10 @@ fun ScreenHeader(
     contentDescription: String,
     title: String,
     showShareButton: Boolean = false,
-    onShareClick: () -> Unit = {}
+    onShareClick: () -> Unit = {},
+    showFavoriteButton: Boolean = false,
+    isFavorite: Boolean = false,
+    onFavoriteToggle: () -> Unit = {}
 ) {
     Box(
         modifier = Modifier
@@ -45,20 +56,48 @@ fun ScreenHeader(
             contentScale = ContentScale.Crop
         )
 
-        if (showShareButton) {
-            Surface(
-                modifier = Modifier
-                    .align(Alignment.TopEnd)
-                    .padding(Dimens.PaddingM),
-                shape = RoundedCornerShape(Dimens.CornerRadiusS),
-                color = MaterialTheme.colorScheme.surface
-            ) {
-                IconButton(onClick = onShareClick) {
-                    Icon(
-                        imageVector = Icons.Default.Share,
-                        contentDescription = "Поделиться",
-                        tint = MaterialTheme.colorScheme.primary
-                    )
+        Column(
+            modifier = Modifier
+                .align(Alignment.TopEnd)
+                .padding(Dimens.PaddingM)
+        ) {
+            if (showFavoriteButton) {
+                IconButton(onClick = onFavoriteToggle) {
+                    Crossfade(
+                        targetState = isFavorite,
+                        animationSpec = tween(durationMillis = 300),
+                        label = "favorite_animation"
+                    ) { isCurrentlyFavorite ->
+                        val heartIcon = rememberVectorPainter(
+                            image = ImageVector.vectorResource(
+                                id = if (isCurrentlyFavorite) R.drawable.ic_heart else R.drawable.ic_heart_empty
+                            )
+                        )
+
+                        Icon(
+                            painter = heartIcon,
+                            contentDescription = "Избранное",
+                            tint = Color.Unspecified,
+                            modifier = Modifier.size(Dimens.IconSizeM)
+                        )
+                    }
+                }
+            }
+
+            if (showShareButton) {
+                Surface(
+                    modifier = Modifier.padding(top = Dimens.PaddingS),
+                    shape = RoundedCornerShape(Dimens.CornerRadiusS),
+                    color = MaterialTheme.colorScheme.surface.copy(alpha = 0.7f)
+                ) {
+
+                    IconButton(onClick = onShareClick) {
+                        Icon(
+                            imageVector = Icons.Default.Share,
+                            contentDescription = "Поделиться",
+                            tint = MaterialTheme.colorScheme.primary
+                        )
+                    }
                 }
             }
         }

@@ -8,6 +8,9 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Share
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -20,12 +23,15 @@ import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.tooling.preview.Preview
 import com.yourcompany.recipecomposeapp.core.ui.theme.Dimens
+import androidx.compose.material3.Icon
 
 @Composable
 fun ScreenHeader(
     imagePainter: Painter,
     contentDescription: String,
     title: String,
+    showShareButton: Boolean = false,
+    onShareClick: () -> Unit = {}
 ) {
     Box(
         modifier = Modifier
@@ -38,6 +44,25 @@ fun ScreenHeader(
             modifier = Modifier.fillMaxSize(),
             contentScale = ContentScale.Crop
         )
+
+        if (showShareButton) {
+            Surface(
+                modifier = Modifier
+                    .align(Alignment.TopEnd)
+                    .padding(Dimens.PaddingM),
+                shape = RoundedCornerShape(Dimens.CornerRadiusS),
+                color = MaterialTheme.colorScheme.surface
+            ) {
+                IconButton(onClick = onShareClick) {
+                    Icon(
+                        imageVector = Icons.Default.Share,
+                        contentDescription = "Поделиться",
+                        tint = MaterialTheme.colorScheme.primary
+                    )
+                }
+            }
+        }
+
         Surface(
             modifier = Modifier
                 .align(Alignment.BottomStart)

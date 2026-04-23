@@ -67,6 +67,9 @@ object Dimens {
     val RecipeCardImageHeight = 160.dp
 
     // Размер слайдера
-
     val SliderHeightM = 32.dp
+
+    // Размер иконок
+
+    val IconSizeM = 40.dp
 }

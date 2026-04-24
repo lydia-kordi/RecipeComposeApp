@@ -24,6 +24,7 @@ import com.yourcompany.recipecomposeapp.ui.recipes.model.RecipeUiModel
 import com.yourcompany.recipecomposeapp.ui.recipes.model.toUiModel
 import androidx.compose.ui.platform.LocalContext
 import com.yourcompany.recipecomposeapp.core.utils.shareRecipe
+import com.yourcompany.recipecomposeapp.core.utils.FavoritePrefsManager
 
 @Composable
 fun RecipeDetailsScreen(
@@ -38,6 +39,11 @@ fun RecipeDetailsScreen(
     var currentPortions by rememberSaveable(recipe.id) { mutableIntStateOf(recipe.servings) }
 
     val context = LocalContext.current
+    val favoritePrefsManager = remember { FavoritePrefsManager(context) }
+
+    var isFavorite by remember(recipe.id) {
+        mutableStateOf(favoritePrefsManager.isFavorite(recipe.id))
+    }
 
     val scaledIngredients = remember(currentPortions, recipe.ingredients) {
         val multiplier = currentPortions.toDouble() / recipe.servings
@@ -49,8 +55,6 @@ fun RecipeDetailsScreen(
         }
     }
 
-    var isFavorite by rememberSaveable { mutableStateOf(false) }
-
     Column(
         modifier = modifier
             .verticalScroll(rememberScrollState())
@@ -61,7 +65,14 @@ fun RecipeDetailsScreen(
             title = recipe.title.uppercase(),
             showFavoriteButton = true,
             isFavorite = isFavorite,
-            onFavoriteToggle = { isFavorite = !isFavorite },
+            onFavoriteToggle = {
+                if (isFavorite) {
+                    favoritePrefsManager.removeFromFavorites(recipe.id)
+                } else {
+                    favoritePrefsManager.addToFavorites(recipe.id)
+                }
+                isFavorite = !isFavorite
+            },
             showShareButton = true,
             onShareClick = {
                 shareRecipe(context, recipe.id, recipe.title)

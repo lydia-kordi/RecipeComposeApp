@@ -23,8 +23,11 @@ import com.yourcompany.recipecomposeapp.data.repository.RecipesRepositoryStub
 import com.yourcompany.recipecomposeapp.ui.recipes.model.RecipeUiModel
 import com.yourcompany.recipecomposeapp.ui.recipes.model.toUiModel
 import androidx.compose.ui.platform.LocalContext
+import com.yourcompany.recipecomposeapp.core.utils.FavoriteDataStoreManager
 import com.yourcompany.recipecomposeapp.core.utils.shareRecipe
-import com.yourcompany.recipecomposeapp.core.utils.FavoritePrefsManager
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.rememberCoroutineScope
+import kotlinx.coroutines.launch
 
 @Composable
 fun RecipeDetailsScreen(
@@ -39,10 +42,17 @@ fun RecipeDetailsScreen(
     var currentPortions by rememberSaveable(recipe.id) { mutableIntStateOf(recipe.servings) }
 
     val context = LocalContext.current
-    val favoritePrefsManager = remember { FavoritePrefsManager(context) }
+    val favoriteDataStoreManager = remember(context) {
+        FavoriteDataStoreManager(context)
+    }
+    val coroutineScope = rememberCoroutineScope()
 
-    var isFavorite by remember(recipe.id) {
-        mutableStateOf(favoritePrefsManager.isFavorite(recipe.id))
+    var isFavorite by rememberSaveable(recipe.id) {
+        mutableStateOf(false)
+    }
+
+    LaunchedEffect(recipe.id) {
+        isFavorite = favoriteDataStoreManager.isFavorite(recipe.id)
     }
 
     val scaledIngredients = remember(currentPortions, recipe.ingredients) {
@@ -66,12 +76,14 @@ fun RecipeDetailsScreen(
             showFavoriteButton = true,
             isFavorite = isFavorite,
             onFavoriteToggle = {
-                if (isFavorite) {
-                    favoritePrefsManager.removeFromFavorites(recipe.id)
-                } else {
-                    favoritePrefsManager.addToFavorites(recipe.id)
+                coroutineScope.launch {
+                    if (isFavorite) {
+                        favoriteDataStoreManager.removeFavorite(recipe.id)
+                    } else {
+                        favoriteDataStoreManager.addFavorite(recipe.id)
+                    }
+                    isFavorite = !isFavorite
                 }
-                isFavorite = !isFavorite
             },
             showShareButton = true,
             onShareClick = {

@@ -9,7 +9,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
@@ -25,9 +24,9 @@ import com.yourcompany.recipecomposeapp.ui.recipes.model.toUiModel
 import androidx.compose.ui.platform.LocalContext
 import com.yourcompany.recipecomposeapp.core.utils.FavoriteDataStoreManager
 import com.yourcompany.recipecomposeapp.core.utils.shareRecipe
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.rememberCoroutineScope
 import kotlinx.coroutines.launch
+import androidx.compose.runtime.collectAsState
 
 @Composable
 fun RecipeDetailsScreen(
@@ -47,13 +46,9 @@ fun RecipeDetailsScreen(
     }
     val coroutineScope = rememberCoroutineScope()
 
-    var isFavorite by rememberSaveable(recipe.id) {
-        mutableStateOf(false)
-    }
-
-    LaunchedEffect(recipe.id) {
-        isFavorite = favoriteDataStoreManager.isFavorite(recipe.id)
-    }
+    val isFavorite by favoriteDataStoreManager
+        .isFavoriteFlow(recipe.id)
+        .collectAsState(initial = false)
 
     val scaledIngredients = remember(currentPortions, recipe.ingredients) {
         val multiplier = currentPortions.toDouble() / recipe.servings
@@ -82,7 +77,6 @@ fun RecipeDetailsScreen(
                     } else {
                         favoriteDataStoreManager.addFavorite(recipe.id)
                     }
-                    isFavorite = !isFavorite
                 }
             },
             showShareButton = true,

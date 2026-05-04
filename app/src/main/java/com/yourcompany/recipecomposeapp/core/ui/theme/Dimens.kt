@@ -7,10 +7,12 @@ import androidx.compose.ui.unit.sp
 object Dimens {
 
     // Отступы
+    val NoPadding = 0.dp
     val PaddingXS = 4.dp
     val PaddingS = 8.dp
     val PaddingM = 16.dp
     val PaddingL = 24.dp
+    val PaddingXL = 28.dp
 
     // Высоты экранов / элементов
     val ScreenTopBarHeight = 56.dp
@@ -70,6 +72,9 @@ object Dimens {
     val SliderHeightM = 32.dp
 
     // Размер иконок
-
     val IconSizeM = 40.dp
+
+    // Размер бейджей
+    val BadgeSizeS = 24.dp
+
 }

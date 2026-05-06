@@ -24,10 +24,19 @@ import com.yourcompany.recipecomposeapp.ui.DEEP_LINK_SCHEME
 import com.yourcompany.recipecomposeapp.ui.PARAM_RECIPE_ID
 import com.yourcompany.recipecomposeapp.ui.recipes.model.toUiModel
 import kotlinx.coroutines.delay
+import androidx.compose.runtime.remember
+import androidx.compose.ui.platform.LocalContext
+import com.yourcompany.recipecomposeapp.core.utils.FavoriteDataStoreManager
 
 @Composable
 fun RecipesApp(deepLinkIntent: Intent? = null) {
     val navController = rememberNavController()
+    val context = LocalContext.current
+
+    val favoriteManager = remember {
+        FavoriteDataStoreManager(context)
+    }
+
     LaunchedEffect(deepLinkIntent) {
         deepLinkIntent?.data?.let { uri ->
             val recipeId: Int? = when (uri.scheme) {
@@ -90,6 +99,13 @@ fun RecipesApp(deepLinkIntent: Intent? = null) {
 
                 composable(Destination.Favorites.route) {
                     FavoritesScreen(
+                        repository = RecipesRepositoryStub,
+                        favoriteManager = favoriteManager,
+                        onRecipeClick = { recipeId ->
+                            navController.navigate(
+                                Destination.RecipeDetails.createRoute(recipeId)
+                            )
+                        },
                         modifier = Modifier
                     )
                 }

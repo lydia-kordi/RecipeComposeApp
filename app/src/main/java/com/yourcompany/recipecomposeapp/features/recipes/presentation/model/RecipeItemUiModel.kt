@@ -1,8 +1,8 @@
-package com.yourcompany.recipecomposeapp.ui.recipes.model
+package com.yourcompany.recipecomposeapp.features.recipes.presentation.model
 
 import androidx.compose.runtime.Immutable
 import com.yourcompany.recipecomposeapp.data.model.RecipeDto
-import com.yourcompany.recipecomposeapp.ui.ASSETS_URI_PREFIX
+import com.yourcompany.recipecomposeapp.core.utils.ASSETS_URI_PREFIX
 
 @Immutable
 data class RecipeItemUiModel(

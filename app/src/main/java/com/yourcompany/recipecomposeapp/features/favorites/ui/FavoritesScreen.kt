@@ -1,4 +1,4 @@
-package com.yourcompany.recipecomposeapp.ui.favorites
+package com.yourcompany.recipecomposeapp.features.favorites.ui
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -16,6 +16,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.yourcompany.recipecomposeapp.R
@@ -24,9 +25,9 @@ import com.yourcompany.recipecomposeapp.core.ui.theme.Dimens
 import com.yourcompany.recipecomposeapp.core.ui.theme.RecipesAppTheme
 import com.yourcompany.recipecomposeapp.core.utils.FavoriteDataStoreManager
 import com.yourcompany.recipecomposeapp.data.repository.RecipesRepositoryStub
-import com.yourcompany.recipecomposeapp.ui.recipes.RecipeItem
-import com.yourcompany.recipecomposeapp.ui.recipes.model.toRecipeItemUiModel
-import com.yourcompany.recipecomposeapp.ui.recipes.model.toUiModel
+import com.yourcompany.recipecomposeapp.features.recipes.ui.RecipeItem
+import com.yourcompany.recipecomposeapp.features.recipes.presentation.model.toRecipeItemUiModel
+import com.yourcompany.recipecomposeapp.features.recipes.presentation.model.toUiModel
 import kotlinx.coroutines.flow.map
 
 @Composable
@@ -36,13 +37,13 @@ fun FavoritesScreen(
     onRecipeClick: (Int) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    val favoriteRecipeDtosFlow = remember(repository, favoriteManager) {
+    val favoriteRecipesFlow = remember(repository, favoriteManager) {
         favoriteManager.getFavoriteIdsFlow().map { favoriteIds ->
             favoriteIds.mapNotNull { idString ->
                 val recipeId = idString.toIntOrNull() ?: return@mapNotNull null
 
                 try {
-                    repository.getRecipeById(recipeId)
+                    repository.getRecipeById(recipeId)?.toUiModel()
                 } catch (_: Exception) {
                     null
                 }
@@ -50,13 +51,7 @@ fun FavoritesScreen(
         }
     }
 
-    val favoriteRecipes by favoriteRecipeDtosFlow
-        .map { recipeDtos ->
-            recipeDtos.map { recipeDto ->
-                recipeDto.toUiModel()
-            }
-        }
-        .collectAsState(initial = emptyList())
+    val favoriteRecipes by favoriteRecipesFlow.collectAsState(initial = emptyList())
 
     Column(
         modifier = modifier.fillMaxSize()
@@ -123,7 +118,7 @@ fun FavoritesScreenPreview() {
         FavoritesScreen(
             repository = RecipesRepositoryStub,
             favoriteManager = FavoriteDataStoreManager(
-                context = androidx.compose.ui.platform.LocalContext.current
+                context = LocalContext.current
             ),
             onRecipeClick = { _ -> }
         )

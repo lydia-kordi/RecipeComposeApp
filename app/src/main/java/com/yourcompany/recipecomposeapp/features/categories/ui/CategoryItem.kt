@@ -1,4 +1,4 @@
-package com.yourcompany.recipecomposeapp.ui.categories
+package com.yourcompany.recipecomposeapp.features.categories.ui
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -18,9 +18,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.yourcompany.recipecomposeapp.R
 import com.yourcompany.recipecomposeapp.core.ui.theme.Dimens
 import com.yourcompany.recipecomposeapp.core.ui.theme.RecipesAppTheme
-import com.yourcompany.recipecomposeapp.ui.categories.model.CategoryUiModel
+import com.yourcompany.recipecomposeapp.features.categories.presentation.model.CategoryUiModel
 import coil3.compose.AsyncImage
-import com.yourcompany.recipecomposeapp.ui.ASSETS_URI_PREFIX
+import com.yourcompany.recipecomposeapp.core.utils.ASSETS_URI_PREFIX
 
 @Composable
 fun CategoryItem(

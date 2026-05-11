@@ -1,4 +1,4 @@
-package com.yourcompany.recipecomposeapp.ui.recipes.model
+package com.yourcompany.recipecomposeapp.features.recipes.presentation.model
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize

@@ -1,7 +1,7 @@
 package com.yourcompany.recipecomposeapp.core.ui.navigation
 
-import com.yourcompany.recipecomposeapp.ui.PARAM_RECIPE_ID
-import com.yourcompany.recipecomposeapp.ui.DEEP_LINK_BASE_URL
+import com.yourcompany.recipecomposeapp.core.utils.PARAM_RECIPE_ID
+import com.yourcompany.recipecomposeapp.core.utils.DEEP_LINK_BASE_URL
 
 sealed class Destination(val route: String) {
     data object Categories : Destination("categories")

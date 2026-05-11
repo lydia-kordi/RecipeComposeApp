@@ -1,4 +1,4 @@
-package com.yourcompany.recipecomposeapp.ui.categories
+package com.yourcompany.recipecomposeapp.features.categories.ui
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -17,7 +17,7 @@ import com.yourcompany.recipecomposeapp.core.ui.theme.Dimens
 import com.yourcompany.recipecomposeapp.data.repository.RecipesRepositoryStub
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.runtime.remember
-import com.yourcompany.recipecomposeapp.ui.categories.model.toUiModel
+import com.yourcompany.recipecomposeapp.features.categories.presentation.model.toUiModel
 
 
 @Composable

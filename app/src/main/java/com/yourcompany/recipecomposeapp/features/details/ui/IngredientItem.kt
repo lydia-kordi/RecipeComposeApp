@@ -1,4 +1,4 @@
-package com.yourcompany.recipecomposeapp.ui.details
+package com.yourcompany.recipecomposeapp.features.details.ui
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -8,7 +8,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.yourcompany.recipecomposeapp.core.ui.theme.Dimens
 import com.yourcompany.recipecomposeapp.core.ui.theme.RecipesAppTheme
-import com.yourcompany.recipecomposeapp.ui.recipes.model.IngredientUiModel
+import com.yourcompany.recipecomposeapp.features.recipes.presentation.model.IngredientUiModel
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.material3.MaterialTheme
